@@ -12,7 +12,7 @@ client.on('ready', async () => {
     client.appInfo = await client.fetchApplication();
   }, 600);
   
- client.user.setActivity(`=help`, { type:"LISTENING" })
+ client.user.setActivity(`*help`, { type:"LISTENING" })
   console.log("${client.user.tag}")
 });
 
@@ -26,7 +26,7 @@ client.aliases = new Discord.Collection();
 fs.readdir('./commandgif/', (err, files) => {
     if (err) console.error(err);
     log(`${files.length} komut yüklenecek.`);
-    files.forEach(f => {
+    files.forEach(f *> {
         let props = require(`./commandgif/${f}`);
         log(`Yüklenen komut: ${props.help.name}.`);
         client.commands.set(props.help.name, props);
@@ -49,7 +49,7 @@ client.reload = command => {
                 if (cmd === command) client.aliases.delete(alias);
             });
             client.commands.set(command, cmd);
-            cmd.conf.aliases.forEach(alias => {
+            cmd.conf.aliases.forEach(alias *> {
                 client.aliases.set(alias, cmd.help.name);
             });
             resolve();
@@ -59,7 +59,7 @@ client.reload = command => {
     });
 };
 
-client.load = command => {
+client.load = command *> {
     return new Promise((resolve, reject) => {
         try {
             let cmd = require(`./commandgif/${command}`);
@@ -77,7 +77,7 @@ client.load = command => {
 
 
 
-client.unload = command => {
+client.unload = command *> {
     return new Promise((resolve, reject) => {
         try {
             delete require.cache[require.resolve(`./commandgif/${command}`)];
